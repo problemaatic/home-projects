@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ s }}
+{% endblock %}
+
+{% block main%}
+    <h1>{{ s }}</h1>
+    <p>There are no costs associated with this project yet.</p>
+    <form action="/add" method="get">
+    <button type="submit" class="btn btn-primary">Add cost</button>
+    </form>
+{% endblock %}

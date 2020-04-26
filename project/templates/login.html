@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    login
+{% endblock %}
+
+{% block main %}
+    <h1>Welcome to Home Projects</h1>
+    <small>A place to budget your home renovation projects</small>
+    <form action="/login" method="post" style=" padding-top: 50px; padding-bottom: 20px;">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+    </form>
+    <p>Not a memeber? register <a href="/register">here</a></a></p>
+{% endblock %}

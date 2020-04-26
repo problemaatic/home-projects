@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New project
+{% endblock %}
+
+{% block main %}
+
+    {% if rows  %}
+        <form action="/new" method="post" autocomplete="off">
+            <div class="form-group has-danger">
+                <label class="col-form-label" for="inputDefault" style="padding-right:10px;">Enter the name of your new project</label>
+                <input name="projectName" type="text" value="{{ project_name }}" class="form-control is-invalid" id="inputInvalid">
+                <div class="invalid-feedback">Sorry, you've already used that name. Try another?</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enter</button>
+        </form>
+
+
+    {% else %}
+    <form action="/new" method="post" autocomplete="off">
+        <div class="form-group" >
+            <label class="col-form-label" for="inputDefault" style="padding-right:10px;">Enter the name of your new project</label>
+            <input name="projectName" type="text" class="form-control" placeholder="Project Name" id="inputDefault" required
+            oninvalid="this.setCustomValidity('Please enter a project name')"
+            oninput="this.setCustomValidity('')">
+        </div>
+        <button type="submit" class="btn btn-primary">Enter</button>
+    </form>
+    {% endif %}
+{% endblock %}

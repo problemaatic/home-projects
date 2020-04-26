@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Projects
+{% endblock %}
+
+{% block main %}
+    <h1 style="padding-bottom: 20px;">My Projects</h1>
+    <form class="form-above-table" action="/new" method="get">
+    <button type="submit" class="btn btn-primary">Add project</button>
+    </form>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Project Name</th>
+                <th scope="col">Project Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in projects %}
+                {% if project.currency %}
+                    <tr class="tabel-active">
+                        <td><form id="{{ project.project_name }}" action="/projects" method="post"><input type="hidden" name="projectName" value="{{ project.project_name }}"></input></form>{{ project.project_name }}</td>
+                        <td>{{ project.currency }}{{ project.project_cost }}</td>
+                        <td><button form="{{ project.project_name }}" type="submit" class="btn btn-outline-primary">View</button></td>
+                        <td><form id="{{ project.id }}" action="/projects" method="post"><input type="hidden" name="deleteProject" value="{{ project.id }}"></input></form></td>
+                        <td><button form="{{ project.id }}" type="submit"  class="btn btn-outline-primary">Delete</button></td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td><form id="{{ project.project_name }}" action="/projects" method="post"><input type="hidden" name="projectName" value="{{ project.project_name }}"></input></form>{{ project.project_name }}</td>
+                        <td>None</td>
+                        <td><button form="{{ project.project_name }}" type="submit" class="btn btn-outline-primary">View</button></td>
+                        <td><form id="{{ project.id }}" action="/projects" method="post"><input type="hidden" name="deleteProject" value="{{ project.id }}"></input></form></td>
+                        <td><button form="{{ project.id }}" type="submit" class="btn btn-outline-primary">Delete</button></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+</table>
+{% endblock %}

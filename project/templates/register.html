@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/register" method="post">
+        <div class="form-group">
+            <label class="control-label" for="username">Choose a username</label>
+            <input id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text" required oninvalid="this.setCustomValidity('Please enter a username')" oninput="setCustomValidity=('')">
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="password">Choose a password</label>
+            <input id="password" class="form-control" name="password" placeholder="Password" type="password" required oninvalid="this.setCustomValidity('Please enter a password')" oninput="setCustomValidity=('')" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-describedby="passwordHelpInline">
+            <small id="passwordHelpInline" class="form-text text-muted">
+                Password must be at least 8 characters long, contain at least 1 capital letter and at least 1 number.
+            </small>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="confirmation">Confirm password</label>
+            <input id="confirmation" class="form-control" name="confirmation" placeholder="Confirm password" type="password"  required oninput="confirm(this)">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+    <script>
+        function confirm(input)
+        {
+            if (input.value != document.getElementById('password').value)
+            {
+                input.setCustomValidity("You're passwords don't match");
+            }
+            else
+            {
+                input.setCustomValidity('');
+            }
+        }
+    </script>
+
+{% endblock %}

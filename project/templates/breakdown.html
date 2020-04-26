@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ s }}
+{% endblock %}
+
+{% block main %}
+
+  <h1>{{ s }}</h1>
+  <form class="form-above-table" action="/add" method="get">
+    <button type="submit" class="btn btn-primary">Add cost</button>
+  </form>
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name of cost</th>
+        <th scope="col">Units</th>
+        <th scope="col">Price per unit</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Total cost</th>
+      </tr>
+    </thead>
+    {% if costs %}
+    <tfoot>
+      <tr>
+        <td colspan="3"></td>
+        <td>Project Total</td>
+        <td><b>{{ costs[0].currency }}{{ project_total}}</b></td>
+      </tr>
+    </tfoot>
+    {% endif %}
+    <tbody>
+      {% for cost in costs %}
+        <tr class="table-active">
+          <td><form id="{{ cost.id }}" action="/breakdown" method="post"><input type="hidden" name="costId" value="{{ cost.id }}"></input></form>{{ cost.cost_name }}</td>
+          <td>{{ cost.unit }}</td>
+          <td>{{ cost.currency }}{{ cost.unit_cost}}</td>
+          <td>{{ cost.quantity }}</td>
+          <td>{{ cost.currency }}{{ cost.total_cost }}</td>
+          <td><button type="submit" form="{{ cost.id }}" class="btn btn-outline-primary">Delete</button></form></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
